@@ -15,6 +15,7 @@ var log = utils.NewLogger()
 type Repo interface {
 	CreateSubscription(ctx context.Context, data *models.Subscription) error
 	UpdateSubscription(ctx context.Context, query, data *models.Subscription) error
+	DeleteSubscription(ctx context.Context, query *models.Subscription) error
 	GetSubscription(ctx context.Context, query *models.Subscription) (*models.Subscription, error)
 	GetSubscriptions(ctx context.Context, query *models.Subscription) ([]*models.Subscription, error)
 }

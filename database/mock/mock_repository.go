@@ -49,6 +49,20 @@ func (mr *MockRepoMockRecorder) CreateSubscription(ctx, data interface{}) *gomoc
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateSubscription", reflect.TypeOf((*MockRepo)(nil).CreateSubscription), ctx, data)
 }
 
+// DeleteSubscription mocks base method.
+func (m *MockRepo) DeleteSubscription(ctx context.Context, query *models.Subscription) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteSubscription", ctx, query)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteSubscription indicates an expected call of DeleteSubscription.
+func (mr *MockRepoMockRecorder) DeleteSubscription(ctx, query interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteSubscription", reflect.TypeOf((*MockRepo)(nil).DeleteSubscription), ctx, query)
+}
+
 // GetSubscription mocks base method.
 func (m *MockRepo) GetSubscription(ctx context.Context, query *models.Subscription) (*models.Subscription, error) {
 	m.ctrl.T.Helper()

@@ -14,6 +14,10 @@ func (i *impl) UpdateSubscription(ctx context.Context, query, data *models.Subsc
 	return i.DB.Model(&models.Subscription{}).Where(query).Updates(data).Error
 }
 
+func (i *impl) DeleteSubscription(ctx context.Context, query *models.Subscription) error {
+	return i.DB.Where(query).Delete(&models.Subscription{}).Error
+}
+
 func (i *impl) GetSubscription(ctx context.Context, query *models.Subscription) (*models.Subscription, error) {
 	var data models.Subscription
 	err := i.DB.Where(query).First(&data).Error
