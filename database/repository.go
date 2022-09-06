@@ -5,7 +5,7 @@ import (
 
 	"github.com/ochom/sdp-lib/models"
 	"github.com/ochom/sdp-lib/utils"
-	"gorm.io/driver/mysql"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
@@ -26,7 +26,7 @@ type impl struct {
 
 func (i *impl) init() {
 	dns := utils.MustGetEnv("DATABASE_DNS")
-	db, err := gorm.Open(mysql.Open(dns), &gorm.Config{})
+	db, err := gorm.Open(postgres.Open(dns), &gorm.Config{})
 	if err != nil {
 		log.Error("failed to connect database", err.Error())
 		return
