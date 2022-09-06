@@ -24,19 +24,20 @@ type impl struct {
 	DB *gorm.DB
 }
 
-func (i *impl) init() {
+func (i *impl) init() error {
 	dns := utils.MustGetEnv("DATABASE_DNS")
 	db, err := gorm.Open(postgres.Open(dns), &gorm.Config{})
 	if err != nil {
 		log.Error("failed to connect database", err.Error())
-		return
+		return err
 	}
 
 	i.DB = db
+	return nil
 }
 
-func (i *impl) migrate() {
-	i.DB.AutoMigrate(
+func (i *impl) migrate() error {
+	return i.DB.AutoMigrate(
 		&models.Subscription{},
 	)
 }
@@ -44,7 +45,15 @@ func (i *impl) migrate() {
 // New ...
 func New() Repo {
 	i := &impl{}
-	i.init()
-	i.migrate()
+	if err := i.init(); err != nil {
+		log.Error("failed to initialize database", err.Error())
+		return &impl{}
+	}
+
+	if err := i.migrate(); err != nil {
+		log.Error("failed to migrate database", err.Error())
+		return &impl{}
+	}
+
 	return i
 }
