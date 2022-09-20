@@ -9,18 +9,18 @@ var logger = NewLogger()
 
 // MustGetEnv ...
 func MustGetEnv(key string) string {
-	value := os.Getenv(key)
-	if value == "" {
+	val, ok := os.LookupEnv(key)
+	if !ok {
 		logger.Error(fmt.Sprintf("Environment variable %s is not set", key))
 	}
-	return value
+	return val
 }
 
 // GetEnvOrDefault ...
 func GetEnvOrDefault(key string, defaultValue string) string {
-	value := os.Getenv(key)
-	if value == "" {
-		return defaultValue
+	val, ok := os.LookupEnv(key)
+	if ok {
+		return val
 	}
-	return value
+	return defaultValue
 }
