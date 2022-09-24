@@ -2,6 +2,8 @@ package utils
 
 import (
 	"context"
+	"crypto/rand"
+	"math/big"
 	"time"
 
 	"github.com/golang-jwt/jwt"
@@ -18,8 +20,7 @@ const (
 // secretKey ...
 var secretKey = GetEnvOrDefault("JWT_SECRET", "secret")
 
-// SignedDetails ...
-type SignedDetails struct {
+type signedDetails struct {
 	ID           string              `json:"id,omitempty"`
 	Email        string              `json:"email,omitempty"`
 	Mobile       string              `json:"Mobile,omitempty"`
@@ -48,9 +49,26 @@ func ComparePassword(hashedPassword, password string) error {
 	return bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
 }
 
+//GenerateOTP generates a 6 figure OTP
+func GenerateOTP(size int) string {
+	otp := make([]byte, size)
+
+	letters := "0123456789"
+	max := big.NewInt(int64(len(letters)))
+	for i := 0; i < size; i++ {
+		num, err := rand.Int(rand.Reader, max)
+		if err != nil {
+			return "123456"
+		}
+		otp[i] = letters[num.Int64()]
+	}
+
+	return string(otp)
+}
+
 // GenerateAuthToken ...
 func GenerateAuthToken(user *models.User, org *models.Organization) (*Token, error) {
-	claims := &SignedDetails{
+	claims := &signedDetails{
 		ID:           user.ID,
 		Email:        user.Email,
 		Mobile:       user.Mobile,
@@ -60,7 +78,7 @@ func GenerateAuthToken(user *models.User, org *models.Organization) (*Token, err
 		},
 	}
 
-	refreshClaims := &SignedDetails{
+	refreshClaims := &signedDetails{
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(time.Hour * 24).Unix(),
 		},
@@ -83,8 +101,8 @@ func GenerateAuthToken(user *models.User, org *models.Organization) (*Token, err
 }
 
 // ValidateToken ...
-func ValidateToken(token string) (*SignedDetails, error) {
-	claims := &SignedDetails{}
+func ValidateToken(token string) (*models.User, error) {
+	claims := &signedDetails{}
 	_, err := jwt.ParseWithClaims(token, claims, func(token *jwt.Token) (interface{}, error) {
 		return []byte(secretKey), nil
 	})
@@ -93,7 +111,14 @@ func ValidateToken(token string) (*SignedDetails, error) {
 		return nil, err
 	}
 
-	return claims, nil
+	user := models.User{
+		ID:             claims.ID,
+		Mobile:         claims.Mobile,
+		Email:          claims.Email,
+		OrganizationID: claims.Organization.ID,
+	}
+
+	return &user, nil
 }
 
 // GetContextUser gets user  from context returns nil if no user in context

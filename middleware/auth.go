@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/ochom/sdp-lib/models"
 	"github.com/ochom/sdp-lib/utils"
 )
 
@@ -23,20 +22,13 @@ func Authenticated() gin.HandlerFunc {
 			return
 		}
 
-		claim, err := utils.ValidateToken(token)
+		user, err := utils.ValidateToken(token)
 		if err != nil {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
 			return
 		}
 
-		user := models.User{
-			ID:             claim.ID,
-			Mobile:         claim.Mobile,
-			Email:          claim.Email,
-			OrganizationID: claim.Organization.ID,
-		}
-
-		authContext := utils.AuthenticatedContext(c, &user)
+		authContext := utils.AuthenticatedContext(c, user)
 		c.Request = c.Request.WithContext(authContext)
 
 		c.Next()
