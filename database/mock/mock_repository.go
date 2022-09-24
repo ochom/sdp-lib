@@ -35,6 +35,20 @@ func (m *MockRepo) EXPECT() *MockRepoMockRecorder {
 	return m.recorder
 }
 
+// CreateOrganization mocks base method.
+func (m *MockRepo) CreateOrganization(ctx context.Context, data *models.Organization) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateOrganization", ctx, data)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// CreateOrganization indicates an expected call of CreateOrganization.
+func (mr *MockRepoMockRecorder) CreateOrganization(ctx, data interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateOrganization", reflect.TypeOf((*MockRepo)(nil).CreateOrganization), ctx, data)
+}
+
 // CreateSubscriber mocks base method.
 func (m *MockRepo) CreateSubscriber(ctx context.Context, data *models.Subscriber) error {
 	m.ctrl.T.Helper()
@@ -49,6 +63,34 @@ func (mr *MockRepoMockRecorder) CreateSubscriber(ctx, data interface{}) *gomock.
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateSubscriber", reflect.TypeOf((*MockRepo)(nil).CreateSubscriber), ctx, data)
 }
 
+// CreateUser mocks base method.
+func (m *MockRepo) CreateUser(ctx context.Context, data *models.User) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateUser", ctx, data)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// CreateUser indicates an expected call of CreateUser.
+func (mr *MockRepoMockRecorder) CreateUser(ctx, data interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateUser", reflect.TypeOf((*MockRepo)(nil).CreateUser), ctx, data)
+}
+
+// DeleteOrganization mocks base method.
+func (m *MockRepo) DeleteOrganization(ctx context.Context, query *models.Organization) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteOrganization", ctx, query)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteOrganization indicates an expected call of DeleteOrganization.
+func (mr *MockRepoMockRecorder) DeleteOrganization(ctx, query interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteOrganization", reflect.TypeOf((*MockRepo)(nil).DeleteOrganization), ctx, query)
+}
+
 // DeleteSubscriber mocks base method.
 func (m *MockRepo) DeleteSubscriber(ctx context.Context, query *models.Subscriber) error {
 	m.ctrl.T.Helper()
@@ -61,6 +103,50 @@ func (m *MockRepo) DeleteSubscriber(ctx context.Context, query *models.Subscribe
 func (mr *MockRepoMockRecorder) DeleteSubscriber(ctx, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteSubscriber", reflect.TypeOf((*MockRepo)(nil).DeleteSubscriber), ctx, query)
+}
+
+// DeleteUser mocks base method.
+func (m *MockRepo) DeleteUser(ctx context.Context, query *models.User) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteUser", ctx, query)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteUser indicates an expected call of DeleteUser.
+func (mr *MockRepoMockRecorder) DeleteUser(ctx, query interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteUser", reflect.TypeOf((*MockRepo)(nil).DeleteUser), ctx, query)
+}
+
+// GetOrganization mocks base method.
+func (m *MockRepo) GetOrganization(ctx context.Context, query *models.Organization) (*models.Organization, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOrganization", ctx, query)
+	ret0, _ := ret[0].(*models.Organization)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetOrganization indicates an expected call of GetOrganization.
+func (mr *MockRepoMockRecorder) GetOrganization(ctx, query interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganization", reflect.TypeOf((*MockRepo)(nil).GetOrganization), ctx, query)
+}
+
+// GetOrganizations mocks base method.
+func (m *MockRepo) GetOrganizations(ctx context.Context, query *models.Organization) ([]*models.Organization, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOrganizations", ctx, query)
+	ret0, _ := ret[0].([]*models.Organization)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetOrganizations indicates an expected call of GetOrganizations.
+func (mr *MockRepoMockRecorder) GetOrganizations(ctx, query interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizations", reflect.TypeOf((*MockRepo)(nil).GetOrganizations), ctx, query)
 }
 
 // GetSubscriber mocks base method.
@@ -91,4 +177,62 @@ func (m *MockRepo) GetSubscribers(ctx context.Context, query *models.Subscriber)
 func (mr *MockRepoMockRecorder) GetSubscribers(ctx, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSubscribers", reflect.TypeOf((*MockRepo)(nil).GetSubscribers), ctx, query)
+}
+
+// GetUser mocks base method.
+func (m *MockRepo) GetUser(ctx context.Context, query *models.User) (*models.User, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetUser", ctx, query)
+	ret0, _ := ret[0].(*models.User)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetUser indicates an expected call of GetUser.
+func (mr *MockRepoMockRecorder) GetUser(ctx, query interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUser", reflect.TypeOf((*MockRepo)(nil).GetUser), ctx, query)
+}
+
+// GetUsers mocks base method.
+func (m *MockRepo) GetUsers(ctx context.Context, query *models.User) ([]*models.User, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetUsers", ctx, query)
+	ret0, _ := ret[0].([]*models.User)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetUsers indicates an expected call of GetUsers.
+func (mr *MockRepoMockRecorder) GetUsers(ctx, query interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUsers", reflect.TypeOf((*MockRepo)(nil).GetUsers), ctx, query)
+}
+
+// UpdateOrganization mocks base method.
+func (m *MockRepo) UpdateOrganization(ctx context.Context, data *models.Organization) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateOrganization", ctx, data)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// UpdateOrganization indicates an expected call of UpdateOrganization.
+func (mr *MockRepoMockRecorder) UpdateOrganization(ctx, data interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateOrganization", reflect.TypeOf((*MockRepo)(nil).UpdateOrganization), ctx, data)
+}
+
+// UpdateUser mocks base method.
+func (m *MockRepo) UpdateUser(ctx context.Context, data *models.User) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateUser", ctx, data)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// UpdateUser indicates an expected call of UpdateUser.
+func (mr *MockRepoMockRecorder) UpdateUser(ctx, data interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateUser", reflect.TypeOf((*MockRepo)(nil).UpdateUser), ctx, data)
 }
