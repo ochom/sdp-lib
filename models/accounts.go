@@ -26,7 +26,7 @@ type User struct {
 	LastName       string         `json:"lastName"`
 	Mobile         string         `json:"mobile"`
 	Email          string         `json:"email"`
-	Password       string         `json:"password"`
+	Password       string         `json:"-"`
 	OTP            string         `json:"otp"`
 	OrganizationID string         `json:"organizationID"`
 	IsVerified     bool           `json:"isVerified"`
