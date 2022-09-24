@@ -128,3 +128,22 @@ func (s *NewSubscription) ToJSON() []byte {
 
 	return b
 }
+
+// NewUserAccount ...
+type NewUserAccount struct {
+	FirstName        string `json:"firstName"`
+	LastName         string `json:"lastName"`
+	Email            string `json:"email"`
+	Mobile           string `json:"mobile"`
+	Password         string `json:"password"`
+	OrganizationName string `json:"organizationName"`
+}
+
+// Validate ...
+func (a *NewUserAccount) Validate() bool {
+	if a.FirstName == "" || a.LastName == "" || a.Email == "" || a.Mobile == "" || a.Password == "" || a.OrganizationName == "" {
+		return false
+	}
+
+	return true
+}
