@@ -1,5 +1,11 @@
 package dto
 
+import (
+	"encoding/json"
+
+	"github.com/ochom/sdp-lib/utils"
+)
+
 // ParamValue ...
 type ParamValue struct {
 	Name  string `json:"name"`
@@ -44,4 +50,81 @@ type SubscriptionResponse struct {
 	Operation         string        `json:"operation"`
 	RequestParam      RequestParam  `json:"requestParam"`
 	ResponseParam     ResponseParam `json:"responseParam"`
+}
+
+// NewSubscription ...
+type NewSubscription struct {
+	RequestID           string `json:"requestID"`
+	RequestTimeStamp    string `json:"requestTimeStamp"`
+	Operation           string `json:"operation"`
+	OfferCode           string `json:"offerCode"`
+	TransactionID       string `json:"transactionID"`
+	ClientTransactionID string `json:"clientTransactionID"`
+	Language            string `json:"language"`
+	SubscriberLifeCycle string `json:"subscriberLifeCycle"`
+	SubscriptionStatus  string `json:"subscriptionStatus"`
+	Channel             string `json:"channel"`
+	Reason              string `json:"reason"`
+	Type                string `json:"type"`
+	OfferName           string `json:"offerName"`
+	Mobile              string `json:"mobile"`
+}
+
+// SetValuesFromInput sets values in payload param
+func (s *NewSubscription) SetValuesFromInput(data []ParamValue) {
+	for _, v := range data {
+		if v.Name == "OfferCode" {
+			s.OfferCode = v.Value
+		}
+
+		if v.Name == "TransactionId" {
+			s.TransactionID = v.Value
+		}
+
+		if v.Name == "ClientTransactionId" {
+			s.ClientTransactionID = v.Value
+		}
+
+		if v.Name == "Language" {
+			s.Language = v.Value
+		}
+
+		if v.Name == "SubscriberLifeCycle" {
+			s.SubscriberLifeCycle = v.Value
+		}
+
+		if v.Name == "SubscriptionStatus" {
+			s.SubscriptionStatus = v.Value
+		}
+
+		if v.Name == "Channel" {
+			s.Channel = v.Value
+		}
+
+		if v.Name == "Reason" {
+			s.Reason = v.Value
+		}
+
+		if v.Name == "Type" {
+			s.Type = v.Value
+		}
+
+		if v.Name == "OfferName" {
+			s.OfferName = v.Value
+		}
+
+		if v.Name == "Msisdn" {
+			s.Mobile = utils.ParseMobile(v.Value)
+		}
+	}
+}
+
+// ToJSON ...
+func (s *NewSubscription) ToJSON() []byte {
+	b, err := json.Marshal(s)
+	if err != nil {
+		return nil
+	}
+
+	return b
 }

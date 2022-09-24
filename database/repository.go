@@ -13,11 +13,22 @@ var log = utils.NewLogger()
 
 // Repo ...
 type Repo interface {
-	CreateSubscription(ctx context.Context, data *models.Subscription) error
-	UpdateSubscription(ctx context.Context, query, data *models.Subscription) error
-	DeleteSubscription(ctx context.Context, query *models.Subscription) error
-	GetSubscription(ctx context.Context, query *models.Subscription) (*models.Subscription, error)
-	GetSubscriptions(ctx context.Context, query *models.Subscription) ([]*models.Subscription, error)
+	CreateOrganization(ctx context.Context, data *models.Organization) error
+	UpdateOrganization(ctx context.Context, data *models.Organization) error
+	DeleteOrganization(ctx context.Context, query *models.Organization) error
+	GetOrganization(ctx context.Context, query *models.Organization) (*models.Organization, error)
+	GetOrganizations(ctx context.Context, query *models.Organization) ([]*models.Organization, error)
+
+	CreateUser(ctx context.Context, data *models.User) error
+	UpdateUser(ctx context.Context, data *models.User) error
+	DeleteUser(ctx context.Context, query *models.User) error
+	GetUser(ctx context.Context, query *models.User) (*models.User, error)
+	GetUsers(ctx context.Context, query *models.User) ([]*models.User, error)
+
+	CreateSubscriber(ctx context.Context, data *models.Subscriber) error
+	DeleteSubscriber(ctx context.Context, query *models.Subscriber) error
+	GetSubscriber(ctx context.Context, query *models.Subscriber) (*models.Subscriber, error)
+	GetSubscribers(ctx context.Context, query *models.Subscriber) ([]*models.Subscriber, error)
 }
 
 type impl struct {
@@ -38,7 +49,7 @@ func (i *impl) init() error {
 
 func (i *impl) migrate() error {
 	return i.DB.AutoMigrate(
-		&models.Subscription{},
+		&models.Subscriber{},
 	)
 }
 

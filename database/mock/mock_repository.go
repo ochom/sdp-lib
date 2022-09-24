@@ -35,74 +35,60 @@ func (m *MockRepo) EXPECT() *MockRepoMockRecorder {
 	return m.recorder
 }
 
-// CreateSubscription mocks base method.
-func (m *MockRepo) CreateSubscription(ctx context.Context, data *models.Subscription) error {
+// CreateSubscriber mocks base method.
+func (m *MockRepo) CreateSubscriber(ctx context.Context, data *models.Subscriber) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "CreateSubscription", ctx, data)
+	ret := m.ctrl.Call(m, "CreateSubscriber", ctx, data)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
-// CreateSubscription indicates an expected call of CreateSubscription.
-func (mr *MockRepoMockRecorder) CreateSubscription(ctx, data interface{}) *gomock.Call {
+// CreateSubscriber indicates an expected call of CreateSubscriber.
+func (mr *MockRepoMockRecorder) CreateSubscriber(ctx, data interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateSubscription", reflect.TypeOf((*MockRepo)(nil).CreateSubscription), ctx, data)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateSubscriber", reflect.TypeOf((*MockRepo)(nil).CreateSubscriber), ctx, data)
 }
 
-// DeleteSubscription mocks base method.
-func (m *MockRepo) DeleteSubscription(ctx context.Context, query *models.Subscription) error {
+// DeleteSubscriber mocks base method.
+func (m *MockRepo) DeleteSubscriber(ctx context.Context, query *models.Subscriber) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "DeleteSubscription", ctx, query)
+	ret := m.ctrl.Call(m, "DeleteSubscriber", ctx, query)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
-// DeleteSubscription indicates an expected call of DeleteSubscription.
-func (mr *MockRepoMockRecorder) DeleteSubscription(ctx, query interface{}) *gomock.Call {
+// DeleteSubscriber indicates an expected call of DeleteSubscriber.
+func (mr *MockRepoMockRecorder) DeleteSubscriber(ctx, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteSubscription", reflect.TypeOf((*MockRepo)(nil).DeleteSubscription), ctx, query)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteSubscriber", reflect.TypeOf((*MockRepo)(nil).DeleteSubscriber), ctx, query)
 }
 
-// GetSubscription mocks base method.
-func (m *MockRepo) GetSubscription(ctx context.Context, query *models.Subscription) (*models.Subscription, error) {
+// GetSubscriber mocks base method.
+func (m *MockRepo) GetSubscriber(ctx context.Context, query *models.Subscriber) (*models.Subscriber, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetSubscription", ctx, query)
-	ret0, _ := ret[0].(*models.Subscription)
+	ret := m.ctrl.Call(m, "GetSubscriber", ctx, query)
+	ret0, _ := ret[0].(*models.Subscriber)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// GetSubscription indicates an expected call of GetSubscription.
-func (mr *MockRepoMockRecorder) GetSubscription(ctx, query interface{}) *gomock.Call {
+// GetSubscriber indicates an expected call of GetSubscriber.
+func (mr *MockRepoMockRecorder) GetSubscriber(ctx, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSubscription", reflect.TypeOf((*MockRepo)(nil).GetSubscription), ctx, query)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSubscriber", reflect.TypeOf((*MockRepo)(nil).GetSubscriber), ctx, query)
 }
 
-// GetSubscriptions mocks base method.
-func (m *MockRepo) GetSubscriptions(ctx context.Context, query *models.Subscription) ([]*models.Subscription, error) {
+// GetSubscribers mocks base method.
+func (m *MockRepo) GetSubscribers(ctx context.Context, query *models.Subscriber) ([]*models.Subscriber, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetSubscriptions", ctx, query)
-	ret0, _ := ret[0].([]*models.Subscription)
+	ret := m.ctrl.Call(m, "GetSubscribers", ctx, query)
+	ret0, _ := ret[0].([]*models.Subscriber)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// GetSubscriptions indicates an expected call of GetSubscriptions.
-func (mr *MockRepoMockRecorder) GetSubscriptions(ctx, query interface{}) *gomock.Call {
+// GetSubscribers indicates an expected call of GetSubscribers.
+func (mr *MockRepoMockRecorder) GetSubscribers(ctx, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSubscriptions", reflect.TypeOf((*MockRepo)(nil).GetSubscriptions), ctx, query)
-}
-
-// UpdateSubscription mocks base method.
-func (m *MockRepo) UpdateSubscription(ctx context.Context, query, data *models.Subscription) error {
-	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "UpdateSubscription", ctx, query, data)
-	ret0, _ := ret[0].(error)
-	return ret0
-}
-
-// UpdateSubscription indicates an expected call of UpdateSubscription.
-func (mr *MockRepoMockRecorder) UpdateSubscription(ctx, query, data interface{}) *gomock.Call {
-	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateSubscription", reflect.TypeOf((*MockRepo)(nil).UpdateSubscription), ctx, query, data)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetSubscribers", reflect.TypeOf((*MockRepo)(nil).GetSubscribers), ctx, query)
 }

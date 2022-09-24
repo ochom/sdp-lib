@@ -6,26 +6,22 @@ import (
 	"github.com/ochom/sdp-lib/models"
 )
 
-func (i *impl) CreateSubscription(ctx context.Context, data *models.Subscription) error {
+func (i *impl) CreateSubscriber(ctx context.Context, data *models.Subscriber) error {
 	return i.DB.Create(data).Error
 }
 
-func (i *impl) UpdateSubscription(ctx context.Context, query, data *models.Subscription) error {
-	return i.DB.Model(&models.Subscription{}).Where(query).Updates(data).Error
+func (i *impl) DeleteSubscriber(ctx context.Context, query *models.Subscriber) error {
+	return i.DB.Where(query).Delete(&models.Subscriber{}).Error
 }
 
-func (i *impl) DeleteSubscription(ctx context.Context, query *models.Subscription) error {
-	return i.DB.Where(query).Delete(&models.Subscription{}).Error
-}
-
-func (i *impl) GetSubscription(ctx context.Context, query *models.Subscription) (*models.Subscription, error) {
-	var data models.Subscription
+func (i *impl) GetSubscriber(ctx context.Context, query *models.Subscriber) (*models.Subscriber, error) {
+	var data models.Subscriber
 	err := i.DB.Where(query).First(&data).Error
 	return &data, err
 }
 
-func (i *impl) GetSubscriptions(ctx context.Context, query *models.Subscription) ([]*models.Subscription, error) {
-	var data []*models.Subscription
+func (i *impl) GetSubscribers(ctx context.Context, query *models.Subscriber) ([]*models.Subscriber, error) {
+	var data []*models.Subscriber
 	err := i.DB.Where(query).Find(&data).Error
 	return data, err
 }
