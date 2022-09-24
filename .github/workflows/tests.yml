@@ -1,4 +1,4 @@
-name: Lint
+name: Test
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  lint:
+  linting:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -27,19 +27,30 @@ jobs:
           go install github.com/securego/gosec/v2/cmd/gosec@latest
           go install github.com/client9/misspell/cmd/misspell@latest
 
-      - name: Run golint
-        run: |
-          staticcheck ./...
-          go fmt $(go list ./... | grep -v /vendor/)
-          go vet $(go list ./... | grep -v /vendor/)
-          golint -set_exit_status $(go list ./... | grep -v /vendor/)
-          errcheck -ignore 'os:.*,' $(go list ./... | grep -v /vendor/)
-          misspell -error .
-          gosec ./...
+      - name: GoLint
+        run: golint -set_exit_status $(go list ./... | grep -v /vendor/)
 
-  test:
+      - name: StaticCheck
+        run: staticcheck ./...
+
+      - name: ErrCheck
+        run: errcheck -ignore 'os:.*,' $(go list ./... | grep -v /vendor/)
+
+      - name: GoSec
+        run: gosec -quiet ./...
+
+      - name: GoMisspell
+        run: misspell -error -locale US -source=text .
+
+      - name: GoVet
+        run: go vet $(go list ./... | grep -v /vendor/)
+
+      - name: GoFmt
+        run: go fmt $(go list ./... | grep -v /vendor/)
+
+  testing:
     needs:
-      - lint
+      - linting
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
