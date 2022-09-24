@@ -2,14 +2,29 @@ package database
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/ochom/sdp-lib/models"
 	"github.com/ochom/sdp-lib/utils"
+	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
+	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
 
-var log = utils.NewLogger()
+// Platform ...
+type Platform string
+
+const (
+	// MySQL ...
+	MySQL Platform = "mysql"
+
+	// Postgres ...
+	Postgres Platform = "postgres"
+
+	// SQLite ...
+	SQLite Platform = "sqlite"
+)
 
 // Repo ...
 type Repo interface {
@@ -35,36 +50,41 @@ type impl struct {
 	DB *gorm.DB
 }
 
-func (i *impl) init() error {
+func (i *impl) init(pl Platform) error {
 	dns := utils.MustGetEnv("DATABASE_DNS")
-	db, err := gorm.Open(postgres.Open(dns), &gorm.Config{})
+	var db *gorm.DB
+	var err error
+
+	switch pl {
+	case MySQL:
+		db, err = gorm.Open(mysql.Open(dns), &gorm.Config{})
+	case Postgres:
+		db, err = gorm.Open(postgres.Open(dns), &gorm.Config{})
+	case SQLite:
+		db, err = gorm.Open(sqlite.Open(dns), &gorm.Config{})
+	}
+
 	if err != nil {
-		log.Error("failed to connect database", err.Error())
-		return err
+		return fmt.Errorf("failed to connect database: %w", err)
 	}
 
 	i.DB = db
+
+	err = i.DB.AutoMigrate(models.AllModels()...)
+
+	if err != nil {
+		return fmt.Errorf("database migration failed: %s", err.Error())
+	}
+
 	return nil
 }
 
-func (i *impl) migrate() error {
-	return i.DB.AutoMigrate(
-		&models.Subscriber{},
-	)
-}
-
 // New ...
-func New() Repo {
+func New(dbPlatform Platform) (Repo, error) {
 	i := &impl{}
-	if err := i.init(); err != nil {
-		log.Error("failed to initialize database", err.Error())
-		return &impl{}
+	if err := i.init(dbPlatform); err != nil {
+		return nil, err
 	}
 
-	if err := i.migrate(); err != nil {
-		log.Error("failed to migrate database", err.Error())
-		return &impl{}
-	}
-
-	return i
+	return i, nil
 }

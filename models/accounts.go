@@ -1,19 +1,5 @@
 package models
 
-import (
-	"time"
-
-	"gorm.io/gorm"
-)
-
-// BaseModel ...
-type BaseModel struct {
-	ID        string         `json:"id"`
-	CreatedAt time.Time      `json:"createdAt"`
-	UpdatedAt time.Time      `json:"updatedAt"`
-	DeletedAt gorm.DeletedAt `json:"deletedAt"`
-}
-
 // Organization ...
 type Organization struct {
 	BaseModel
