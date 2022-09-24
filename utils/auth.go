@@ -2,6 +2,8 @@ package utils
 
 import (
 	"context"
+	"crypto/rand"
+	"math/big"
 	"time"
 
 	"github.com/golang-jwt/jwt"
@@ -45,6 +47,23 @@ func HashPassword(password string) (string, error) {
 // ComparePassword ...
 func ComparePassword(hashedPassword, password string) error {
 	return bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
+}
+
+//GenerateOTP generates a 6 figure OTP
+func GenerateOTP(size int) string {
+	otp := make([]byte, size)
+
+	letters := "0123456789"
+	max := big.NewInt(int64(len(letters)))
+	for i := 0; i < size; i++ {
+		num, err := rand.Int(rand.Reader, max)
+		if err != nil {
+			return "123456"
+		}
+		otp[i] = letters[num.Int64()]
+	}
+
+	return string(otp)
 }
 
 // GenerateAuthToken ...
