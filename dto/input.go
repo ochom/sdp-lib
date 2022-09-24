@@ -131,12 +131,12 @@ func (s *NewSubscription) ToJSON() []byte {
 
 // NewUserAccount ...
 type NewUserAccount struct {
-	FirstName        string `json:"firstName"`
-	LastName         string `json:"lastName"`
-	Email            string `json:"email"`
-	Mobile           string `json:"mobile"`
-	Password         string `json:"password"`
-	OrganizationName string `json:"organizationName"`
+	FirstName        string `json:"firstName" binding:"required"`
+	LastName         string `json:"lastName" binding:"required"`
+	Email            string `json:"email" binding:"required"`
+	Mobile           string `json:"mobile" binding:"required"`
+	Password         string `json:"password" binding:"required"`
+	OrganizationName string `json:"organizationName" binding:"required"`
 }
 
 // Validate ...
