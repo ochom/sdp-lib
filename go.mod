@@ -5,6 +5,7 @@ go 1.18
 require (
 	github.com/dongri/phonenumber v0.0.0-20220808001537-be17ad0b5144
 	github.com/golang/mock v1.6.0
+	github.com/google/uuid v1.3.0
 	gorm.io/driver/mysql v1.3.6
 	gorm.io/driver/postgres v1.3.9
 	gorm.io/driver/sqlite v1.3.6
