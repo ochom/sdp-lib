@@ -1,4 +1,4 @@
-name: Lint
+name: Test
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  lint:
+  linting:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -37,9 +37,9 @@ jobs:
           misspell -error .
           gosec ./...
 
-  test:
+  testing:
     needs:
-      - lint
+      - linting
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
