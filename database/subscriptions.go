@@ -17,11 +17,17 @@ func (i *impl) DeleteSubscriber(ctx context.Context, query *models.Subscriber) e
 func (i *impl) GetSubscriber(ctx context.Context, query *models.Subscriber) (*models.Subscriber, error) {
 	var data models.Subscriber
 	err := i.DB.Where(query).First(&data).Error
-	return &data, err
+	if err != nil {
+		return nil, err
+	}
+	return &data, nil
 }
 
 func (i *impl) GetSubscribers(ctx context.Context, query *models.Subscriber) ([]*models.Subscriber, error) {
 	var data []*models.Subscriber
 	err := i.DB.Where(query).Find(&data).Error
-	return data, err
+	if err != nil {
+		return nil, err
+	}
+	return data, nil
 }
