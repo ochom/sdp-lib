@@ -23,9 +23,12 @@ func (i *impl) DeleteUser(ctx context.Context, query *models.User) error {
 
 // GetUser ...
 func (i *impl) GetUser(ctx context.Context, query *models.User) (*models.User, error) {
-	var data *models.User
-	err := i.DB.Where(query).First(data).Error
-	return data, err
+	var data models.User
+	err := i.DB.Where(query).First(&data).Error
+	if err != nil {
+		return nil, err
+	}
+	return &data, err
 }
 
 // GetUsers ...
