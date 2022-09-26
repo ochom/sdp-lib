@@ -28,15 +28,12 @@ func (i *impl) GetUser(ctx context.Context, query *models.User) (*models.User, e
 	if err != nil {
 		return nil, err
 	}
-	return &data, nil
+	return &data, err
 }
 
 // GetUsers ...
 func (i *impl) GetUsers(ctx context.Context, query *models.User) ([]*models.User, error) {
 	var data []*models.User
 	err := i.DB.Where(query).Find(&data).Error
-	if err != nil {
-		return nil, err
-	}
-	return data, nil
+	return data, err
 }

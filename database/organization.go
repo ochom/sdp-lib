@@ -28,15 +28,12 @@ func (i *impl) GetOrganization(ctx context.Context, query *models.Organization) 
 	if err != nil {
 		return nil, err
 	}
-	return &data, nil
+	return &data, err
 }
 
 // GetOrganizations ...
 func (i *impl) GetOrganizations(ctx context.Context, query *models.Organization) ([]*models.Organization, error) {
 	var data []*models.Organization
 	err := i.DB.Where(query).Find(&data).Error
-	if err != nil {
-		return nil, err
-	}
-	return data, nil
+	return data, err
 }
