@@ -21,10 +21,9 @@ const (
 var secretKey = GetEnvOrDefault("JWT_SECRET", "secret")
 
 type signedDetails struct {
-	ID           string              `json:"id,omitempty"`
-	Email        string              `json:"email,omitempty"`
-	Mobile       string              `json:"Mobile,omitempty"`
-	Organization models.Organization `json:"organization,omitempty"`
+	ID     string `json:"id,omitempty"`
+	Email  string `json:"email,omitempty"`
+	Mobile string `json:"Mobile,omitempty"`
 	jwt.StandardClaims
 }
 
@@ -67,12 +66,11 @@ func GenerateOTP(size int) string {
 }
 
 // GenerateAuthToken ...
-func GenerateAuthToken(user *models.User, org *models.Organization) (*Token, error) {
+func GenerateAuthToken(user *models.User) (*Token, error) {
 	claims := &signedDetails{
-		ID:           user.ID,
-		Email:        user.Email,
-		Mobile:       user.Mobile,
-		Organization: *org,
+		ID:     user.ID,
+		Email:  user.Email,
+		Mobile: user.Mobile,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(time.Hour * 24).Unix(),
 		},
@@ -112,10 +110,9 @@ func ValidateToken(token string) (*models.User, error) {
 	}
 
 	user := models.User{
-		ID:             claims.ID,
-		Mobile:         claims.Mobile,
-		Email:          claims.Email,
-		OrganizationID: claims.Organization.ID,
+		ID:     claims.ID,
+		Mobile: claims.Mobile,
+		Email:  claims.Email,
 	}
 
 	return &user, nil
