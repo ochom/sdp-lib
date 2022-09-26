@@ -25,12 +25,18 @@ func (i *impl) DeleteOrganization(ctx context.Context, query *models.Organizatio
 func (i *impl) GetOrganization(ctx context.Context, query *models.Organization) (*models.Organization, error) {
 	var data models.Organization
 	err := i.DB.Where(query).First(&data).Error
-	return &data, err
+	if err != nil {
+		return nil, err
+	}
+	return &data, nil
 }
 
 // GetOrganizations ...
 func (i *impl) GetOrganizations(ctx context.Context, query *models.Organization) ([]*models.Organization, error) {
 	var data []*models.Organization
 	err := i.DB.Where(query).Find(&data).Error
-	return data, err
+	if err != nil {
+		return nil, err
+	}
+	return data, nil
 }
