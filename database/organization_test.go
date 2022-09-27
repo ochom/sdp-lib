@@ -42,6 +42,24 @@ func Test_impl_UpdateOrganization(t *testing.T) {
 	require.Equal(t, data.Name, got.Name)
 }
 
+func Test_impl_DeleteOrganization(t *testing.T) {
+	i := initDB(t)
+	ctx := context.Background()
+
+	data := &models.Organization{
+		ID:   uuid.NewString(),
+		Name: "test",
+	}
+	err := i.CreateOrganization(ctx, data)
+	require.NoError(t, err)
+
+	err = i.DeleteOrganization(ctx, &models.Organization{ID: data.ID})
+	require.NoError(t, err)
+
+	_, err = i.GetOrganization(ctx, &models.Organization{ID: data.ID})
+	require.Error(t, err)
+}
+
 func Test_impl_GetOrganization(t *testing.T) {
 	i := initDB(t)
 	ctx := context.Background()
@@ -66,31 +84,35 @@ func Test_impl_GetOrganizations(t *testing.T) {
 	i := initDB(t)
 	ctx := context.Background()
 
-	data := &models.Organization{
-		ID:   uuid.NewString(),
-		Name: "test",
+	existing, err := i.GetOrganizations(ctx, &models.Organization{})
+	require.NoError(t, err)
+
+	for _, e := range existing {
+		err = i.DeleteOrganization(ctx, e)
+		require.NoError(t, err)
 	}
-	err := i.CreateOrganization(ctx, data)
-	require.NoError(t, err)
 
-	_, err = i.GetOrganizations(ctx, &models.Organization{ID: data.ID})
-	require.NoError(t, err)
-}
-
-func Test_impl_DeleteOrganization(t *testing.T) {
-	i := initDB(t)
-	ctx := context.Background()
-
-	data := &models.Organization{
-		ID:   uuid.NewString(),
-		Name: "test",
+	data := []*models.Organization{
+		{
+			ID:   uuid.NewString(),
+			Name: "test",
+		},
+		{
+			ID:   uuid.NewString(),
+			Name: "test",
+		},
+		{
+			ID:   uuid.NewString(),
+			Name: "test",
+		},
 	}
-	err := i.CreateOrganization(ctx, data)
-	require.NoError(t, err)
 
-	err = i.DeleteOrganization(ctx, &models.Organization{ID: data.ID})
-	require.NoError(t, err)
+	for _, d := range data {
+		err = i.CreateOrganization(ctx, d)
+		require.NoError(t, err)
+	}
 
-	_, err = i.GetOrganization(ctx, &models.Organization{ID: data.ID})
-	require.Error(t, err)
+	got, err := i.GetOrganizations(ctx, &models.Organization{})
+	require.NoError(t, err)
+	require.Len(t, got, len(data))
 }
