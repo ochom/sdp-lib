@@ -28,7 +28,7 @@ func (i *impl) GetOrganization(ctx context.Context, query *models.Organization) 
 	if err != nil {
 		return nil, err
 	}
-	return &data, err
+	return &data, nil
 }
 
 // GetOrganizations ...

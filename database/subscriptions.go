@@ -20,7 +20,7 @@ func (i *impl) GetSubscriber(ctx context.Context, query *models.Subscriber) (*mo
 	if err != nil {
 		return nil, err
 	}
-	return &data, err
+	return &data, nil
 }
 
 func (i *impl) GetSubscribers(ctx context.Context, query *models.Subscriber) ([]*models.Subscriber, error) {
