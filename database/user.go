@@ -28,7 +28,7 @@ func (i *impl) GetUser(ctx context.Context, query *models.User) (*models.User, e
 	if err != nil {
 		return nil, err
 	}
-	return &data, err
+	return &data, nil
 }
 
 // GetUsers ...
