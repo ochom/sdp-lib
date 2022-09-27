@@ -42,6 +42,24 @@ func Test_impl_UpdateUser(t *testing.T) {
 	require.Equal(t, data.FirstName, got.FirstName)
 }
 
+func Test_impl_DeleteUser(t *testing.T) {
+	i := initDB(t)
+	ctx := context.Background()
+
+	data := &models.User{
+		ID:        uuid.NewString(),
+		FirstName: "test",
+	}
+	err := i.CreateUser(ctx, data)
+	require.NoError(t, err)
+
+	err = i.DeleteUser(ctx, &models.User{ID: data.ID})
+	require.NoError(t, err)
+
+	_, err = i.GetUser(ctx, &models.User{ID: data.ID})
+	require.Error(t, err)
+}
+
 func Test_impl_GetUser(t *testing.T) {
 	i := initDB(t)
 	ctx := context.Background()
@@ -66,31 +84,35 @@ func Test_impl_GetUsers(t *testing.T) {
 	i := initDB(t)
 	ctx := context.Background()
 
-	data := &models.User{
-		ID:        uuid.NewString(),
-		FirstName: "test",
+	existing, err := i.GetUsers(ctx, &models.User{})
+	require.NoError(t, err)
+
+	for _, e := range existing {
+		err = i.DeleteUser(ctx, e)
+		require.NoError(t, err)
 	}
-	err := i.CreateUser(ctx, data)
-	require.NoError(t, err)
 
-	_, err = i.GetUsers(ctx, &models.User{ID: data.ID})
-	require.NoError(t, err)
-}
-
-func Test_impl_DeleteUser(t *testing.T) {
-	i := initDB(t)
-	ctx := context.Background()
-
-	data := &models.User{
-		ID:        uuid.NewString(),
-		FirstName: "test",
+	data := []*models.User{
+		{
+			ID:        uuid.NewString(),
+			FirstName: "test",
+		},
+		{
+			ID:        uuid.NewString(),
+			FirstName: "test",
+		},
+		{
+			ID:        uuid.NewString(),
+			FirstName: "test",
+		},
 	}
-	err := i.CreateUser(ctx, data)
-	require.NoError(t, err)
 
-	err = i.DeleteUser(ctx, &models.User{ID: data.ID})
-	require.NoError(t, err)
+	for _, d := range data {
+		err = i.CreateUser(ctx, d)
+		require.NoError(t, err)
+	}
 
-	_, err = i.GetUser(ctx, &models.User{ID: data.ID})
-	require.Error(t, err)
+	got, err := i.GetUsers(ctx, &models.User{})
+	require.NoError(t, err)
+	require.Len(t, got, len(data))
 }

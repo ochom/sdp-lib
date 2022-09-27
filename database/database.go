@@ -12,6 +12,8 @@ import (
 	"gorm.io/gorm"
 )
 
+//go:generate mockgen -source=database.go -destination=mocks/mock_database.go -package=mocks
+
 // Platform ...
 type Platform string
 
@@ -44,6 +46,18 @@ type Repo interface {
 	DeleteSubscriber(ctx context.Context, query *models.Subscriber) error
 	GetSubscriber(ctx context.Context, query *models.Subscriber) (*models.Subscriber, error)
 	GetSubscribers(ctx context.Context, query *models.Subscriber) ([]*models.Subscriber, error)
+
+	CreateContactGroup(ctx context.Context, data *models.ContactGroup) error
+	UpdateContactGroup(ctx context.Context, data *models.ContactGroup) error
+	DeleteContactGroup(ctx context.Context, query *models.ContactGroup) error
+	GetContactGroup(ctx context.Context, query *models.ContactGroup) (*models.ContactGroup, error)
+	GetContactGroups(ctx context.Context, query *models.ContactGroup) ([]*models.ContactGroup, error)
+
+	CreateContact(ctx context.Context, data *models.Contact) error
+	UpdateContact(ctx context.Context, data *models.Contact) error
+	DeleteContact(ctx context.Context, query *models.Contact) error
+	GetContact(ctx context.Context, query *models.Contact) (*models.Contact, error)
+	GetContacts(ctx context.Context, query *models.Contact) ([]*models.Contact, error)
 }
 
 type impl struct {
