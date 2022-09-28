@@ -15,6 +15,7 @@ type ContactGroup struct {
 	CreatedAt      time.Time      `json:"createdAt"`
 	UpdatedAt      time.Time      `json:"updatedAt"`
 	DeletedAt      gorm.DeletedAt `json:"deletedAt"`
+	TotalContacts  int64          `json:"totalContacts" gorm:"-"`
 }
 
 // Contact ...
