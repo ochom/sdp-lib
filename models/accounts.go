@@ -14,6 +14,7 @@ type Organization struct {
 	Mobile     string         `json:"mobile"`
 	Email      string         `json:"email"`
 	IsVerified bool           `json:"isVerified"`
+	IsActive   bool           `json:"isActive"`
 	CreatedAt  time.Time      `json:"createdAt"`
 	UpdatedAt  time.Time      `json:"updatedAt"`
 	DeletedAt  gorm.DeletedAt `json:"deletedAt"`
@@ -30,6 +31,8 @@ type User struct {
 	OTP            string         `json:"-"`
 	OrganizationID string         `json:"organizationID"`
 	IsVerified     bool           `json:"isVerified"`
+	IsActive       bool           `json:"isActive"`
+	IsAdmin        bool           `json:"isAdmin"`
 	CreatedAt      time.Time      `json:"createdAt"`
 	UpdatedAt      time.Time      `json:"updatedAt"`
 	DeletedAt      gorm.DeletedAt `json:"deletedAt"`
