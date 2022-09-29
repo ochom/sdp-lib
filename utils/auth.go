@@ -21,9 +21,7 @@ const (
 var secretKey = GetEnvOrDefault("JWT_SECRET", "secret")
 
 type signedDetails struct {
-	ID     string `json:"id,omitempty"`
-	Email  string `json:"email,omitempty"`
-	Mobile string `json:"Mobile,omitempty"`
+	User models.User
 	jwt.StandardClaims
 }
 
@@ -68,9 +66,7 @@ func GenerateOTP(size int) string {
 // GenerateAuthToken ...
 func GenerateAuthToken(user *models.User) (*Token, error) {
 	claims := &signedDetails{
-		ID:     user.ID,
-		Email:  user.Email,
-		Mobile: user.Mobile,
+		User: *user,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(time.Hour * 24).Unix(),
 		},
@@ -98,6 +94,11 @@ func GenerateAuthToken(user *models.User) (*Token, error) {
 	}, nil
 }
 
+// CreateAuthContext ....
+func CreateAuthContext(ctx context.Context, user *models.User) context.Context {
+	return context.WithValue(ctx, ctxUser, user)
+}
+
 // ValidateToken ...
 func ValidateToken(token string) (*models.User, error) {
 	claims := &signedDetails{}
@@ -109,17 +110,11 @@ func ValidateToken(token string) (*models.User, error) {
 		return nil, err
 	}
 
-	user := models.User{
-		ID:     claims.ID,
-		Mobile: claims.Mobile,
-		Email:  claims.Email,
-	}
-
-	return &user, nil
+	return &claims.User, nil
 }
 
-// GetContextUser gets user  from context returns nil if no user in context
-func GetContextUser(ctx context.Context) *models.User {
+// AuthenticatedUser gets user  from context returns nil if no user in context
+func AuthenticatedUser(ctx context.Context) *models.User {
 	if ctx.Value(ctxUser) == nil {
 		return nil
 	}
@@ -130,9 +125,4 @@ func GetContextUser(ctx context.Context) *models.User {
 	}
 
 	return user
-}
-
-// AuthenticatedContext ....
-func AuthenticatedContext(ctx context.Context, user *models.User) context.Context {
-	return context.WithValue(ctx, ctxUser, user)
 }
