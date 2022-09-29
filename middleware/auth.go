@@ -28,7 +28,7 @@ func Authenticated() gin.HandlerFunc {
 			return
 		}
 
-		authContext := utils.AuthenticatedContext(c, user)
+		authContext := utils.CreateAuthContext(c, user)
 		c.Request = c.Request.WithContext(authContext)
 
 		c.Next()
