@@ -77,6 +77,20 @@ func (mr *MockRepoMockRecorder) CreateOrganization(ctx, data interface{}) *gomoc
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateOrganization", reflect.TypeOf((*MockRepo)(nil).CreateOrganization), ctx, data)
 }
 
+// CreateShortcode mocks base method.
+func (m *MockRepo) CreateShortcode(ctx context.Context, data *models.Shortcode) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateShortcode", ctx, data)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// CreateShortcode indicates an expected call of CreateShortcode.
+func (mr *MockRepoMockRecorder) CreateShortcode(ctx, data interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateShortcode", reflect.TypeOf((*MockRepo)(nil).CreateShortcode), ctx, data)
+}
+
 // CreateSubscriber mocks base method.
 func (m *MockRepo) CreateSubscriber(ctx context.Context, data *models.Subscriber) error {
 	m.ctrl.T.Helper()
@@ -145,6 +159,20 @@ func (m *MockRepo) DeleteOrganization(ctx context.Context, query *models.Organiz
 func (mr *MockRepoMockRecorder) DeleteOrganization(ctx, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteOrganization", reflect.TypeOf((*MockRepo)(nil).DeleteOrganization), ctx, query)
+}
+
+// DeleteShortcode mocks base method.
+func (m *MockRepo) DeleteShortcode(ctx context.Context, query *models.Shortcode) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteShortcode", ctx, query)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteShortcode indicates an expected call of DeleteShortcode.
+func (mr *MockRepoMockRecorder) DeleteShortcode(ctx, query interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteShortcode", reflect.TypeOf((*MockRepo)(nil).DeleteShortcode), ctx, query)
 }
 
 // DeleteSubscriber mocks base method.
@@ -265,6 +293,36 @@ func (mr *MockRepoMockRecorder) GetOrganizations(ctx, query interface{}) *gomock
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOrganizations", reflect.TypeOf((*MockRepo)(nil).GetOrganizations), ctx, query)
 }
 
+// GetShortcode mocks base method.
+func (m *MockRepo) GetShortcode(ctx context.Context, query *models.Shortcode) (*models.Shortcode, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetShortcode", ctx, query)
+	ret0, _ := ret[0].(*models.Shortcode)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetShortcode indicates an expected call of GetShortcode.
+func (mr *MockRepoMockRecorder) GetShortcode(ctx, query interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetShortcode", reflect.TypeOf((*MockRepo)(nil).GetShortcode), ctx, query)
+}
+
+// GetShortcodes mocks base method.
+func (m *MockRepo) GetShortcodes(ctx context.Context, query *models.Shortcode) ([]*models.Shortcode, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetShortcodes", ctx, query)
+	ret0, _ := ret[0].([]*models.Shortcode)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetShortcodes indicates an expected call of GetShortcodes.
+func (mr *MockRepoMockRecorder) GetShortcodes(ctx, query interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetShortcodes", reflect.TypeOf((*MockRepo)(nil).GetShortcodes), ctx, query)
+}
+
 // GetSubscriber mocks base method.
 func (m *MockRepo) GetSubscriber(ctx context.Context, query *models.Subscriber) (*models.Subscriber, error) {
 	m.ctrl.T.Helper()
@@ -365,6 +423,20 @@ func (m *MockRepo) UpdateOrganization(ctx context.Context, data *models.Organiza
 func (mr *MockRepoMockRecorder) UpdateOrganization(ctx, data interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateOrganization", reflect.TypeOf((*MockRepo)(nil).UpdateOrganization), ctx, data)
+}
+
+// UpdateShortcode mocks base method.
+func (m *MockRepo) UpdateShortcode(ctx context.Context, data *models.Shortcode) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateShortcode", ctx, data)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// UpdateShortcode indicates an expected call of UpdateShortcode.
+func (mr *MockRepoMockRecorder) UpdateShortcode(ctx, data interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateShortcode", reflect.TypeOf((*MockRepo)(nil).UpdateShortcode), ctx, data)
 }
 
 // UpdateUser mocks base method.
