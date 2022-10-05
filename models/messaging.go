@@ -6,8 +6,8 @@ import (
 	"gorm.io/gorm"
 )
 
-// Shortcode ...
-type Shortcode struct {
+// Offer ...
+type Offer struct {
 	ID             string         `json:"id"`
 	OrganizationID string         `json:"organizationID"`
 	OrgName        string         `json:"orgName"`
@@ -27,7 +27,7 @@ type Shortcode struct {
 type Inbox struct {
 	ID          string         `json:"id"`
 	From        string         `json:"from"`
-	To          string         `json:"to"` // can be shortCode or SenderID
+	To          string         `json:"to"` // can be Offer or SenderID
 	Subject     string         `json:"subject"`
 	Body        string         `json:"body"`
 	Attachments string         `json:"attachments"`
@@ -41,7 +41,7 @@ type Inbox struct {
 // Outbox ...
 type Outbox struct {
 	ID          string         `json:"id"`
-	From        string         `json:"from"` // can be shortCode or SenderID
+	From        string         `json:"from"` // can be Offer or SenderID
 	To          string         `json:"to"`
 	Subject     string         `json:"subject"`
 	Body        string         `json:"body"`

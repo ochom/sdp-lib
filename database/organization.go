@@ -38,24 +38,24 @@ func (i *impl) GetOrganizations(ctx context.Context, query *models.Organization)
 	return data, err
 }
 
-// CreateShortcode ...
-func (i *impl) CreateShortcode(ctx context.Context, data *models.Shortcode) error {
+// CreateOffer ...
+func (i *impl) CreateOffer(ctx context.Context, data *models.Offer) error {
 	return i.DB.Create(data).Error
 }
 
-// UpdateShortcode ...
-func (i *impl) UpdateShortcode(ctx context.Context, data *models.Shortcode) error {
+// UpdateOffer ...
+func (i *impl) UpdateOffer(ctx context.Context, data *models.Offer) error {
 	return i.DB.Save(data).Error
 }
 
-// DeleteShortcode ...
-func (i *impl) DeleteShortcode(ctx context.Context, query *models.Shortcode) error {
-	return i.DB.Where(query).Delete(&models.Shortcode{}).Error
+// DeleteOffer ...
+func (i *impl) DeleteOffer(ctx context.Context, query *models.Offer) error {
+	return i.DB.Where(query).Delete(&models.Offer{}).Error
 }
 
-// GetShortcode ...
-func (i *impl) GetShortcode(ctx context.Context, query *models.Shortcode) (*models.Shortcode, error) {
-	var data models.Shortcode
+// GetOffer ...
+func (i *impl) GetOffer(ctx context.Context, query *models.Offer) (*models.Offer, error) {
+	var data models.Offer
 	err := i.DB.Where(query).First(&data).Error
 	if err != nil {
 		return nil, err
@@ -63,9 +63,9 @@ func (i *impl) GetShortcode(ctx context.Context, query *models.Shortcode) (*mode
 	return &data, nil
 }
 
-// GetShortcodes ...
-func (i *impl) GetShortcodes(ctx context.Context, query *models.Shortcode) ([]*models.Shortcode, error) {
-	var data []*models.Shortcode
+// GetOffers ...
+func (i *impl) GetOffers(ctx context.Context, query *models.Offer) ([]*models.Offer, error) {
+	var data []*models.Offer
 	err := i.DB.Where(query).Find(&data).Error
 	return data, err
 }

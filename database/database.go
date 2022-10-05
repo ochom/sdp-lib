@@ -36,11 +36,11 @@ type Repo interface {
 	GetOrganization(ctx context.Context, query *models.Organization) (*models.Organization, error)
 	GetOrganizations(ctx context.Context, query *models.Organization) ([]*models.Organization, error)
 
-	CreateShortcode(ctx context.Context, data *models.Shortcode) error
-	UpdateShortcode(ctx context.Context, data *models.Shortcode) error
-	DeleteShortcode(ctx context.Context, query *models.Shortcode) error
-	GetShortcode(ctx context.Context, query *models.Shortcode) (*models.Shortcode, error)
-	GetShortcodes(ctx context.Context, query *models.Shortcode) ([]*models.Shortcode, error)
+	CreateOffer(ctx context.Context, data *models.Offer) error
+	UpdateOffer(ctx context.Context, data *models.Offer) error
+	DeleteOffer(ctx context.Context, query *models.Offer) error
+	GetOffer(ctx context.Context, query *models.Offer) (*models.Offer, error)
+	GetOffers(ctx context.Context, query *models.Offer) ([]*models.Offer, error)
 
 	CreateUser(ctx context.Context, data *models.User) error
 	UpdateUser(ctx context.Context, data *models.User) error

@@ -117,94 +117,94 @@ func Test_impl_GetOrganizations(t *testing.T) {
 	require.Len(t, got, len(data))
 }
 
-func Test_impl_CreateShortcode(t *testing.T) {
+func Test_impl_CreateOffer(t *testing.T) {
 	i := initDB(t)
 	ctx := context.Background()
-	data := &models.Shortcode{
+	data := &models.Offer{
 		ID:   uuid.NewString(),
 		Name: "test",
 	}
 
-	err := i.CreateShortcode(ctx, data)
+	err := i.CreateOffer(ctx, data)
 	require.NoError(t, err)
 
-	got, err := i.GetShortcode(ctx, &models.Shortcode{ID: data.ID})
+	got, err := i.GetOffer(ctx, &models.Offer{ID: data.ID})
 	require.NoError(t, err)
 	require.Equal(t, data.ID, got.ID)
 }
 
-func Test_impl_UpdateShortcode(t *testing.T) {
+func Test_impl_UpdateOffer(t *testing.T) {
 	i := initDB(t)
 	ctx := context.Background()
 
-	data := &models.Shortcode{
+	data := &models.Offer{
 		ID:   uuid.NewString(),
 		Name: "Test",
 	}
 
-	err := i.CreateShortcode(ctx, data)
+	err := i.CreateOffer(ctx, data)
 	require.NoError(t, err)
 
 	data.Name = "New Name"
-	err = i.UpdateShortcode(ctx, data)
+	err = i.UpdateOffer(ctx, data)
 	require.NoError(t, err)
 
-	got, err := i.GetShortcode(ctx, &models.Shortcode{ID: data.ID})
+	got, err := i.GetOffer(ctx, &models.Offer{ID: data.ID})
 	require.NoError(t, err)
 	require.Equal(t, data.Name, got.Name)
 }
 
-func Test_impl_DeleteShortcode(t *testing.T) {
+func Test_impl_DeleteOffer(t *testing.T) {
 	i := initDB(t)
 	ctx := context.Background()
 
-	data := &models.Shortcode{
+	data := &models.Offer{
 		ID:   uuid.NewString(),
 		Name: "test",
 	}
-	err := i.CreateShortcode(ctx, data)
+	err := i.CreateOffer(ctx, data)
 	require.NoError(t, err)
 
-	err = i.DeleteShortcode(ctx, &models.Shortcode{ID: data.ID})
+	err = i.DeleteOffer(ctx, &models.Offer{ID: data.ID})
 	require.NoError(t, err)
 
-	_, err = i.GetShortcode(ctx, &models.Shortcode{ID: data.ID})
+	_, err = i.GetOffer(ctx, &models.Offer{ID: data.ID})
 	require.Error(t, err)
 }
 
-func Test_impl_GetShortcode(t *testing.T) {
+func Test_impl_GetOffer(t *testing.T) {
 	i := initDB(t)
 	ctx := context.Background()
 
-	data := &models.Shortcode{
+	data := &models.Offer{
 		ID:   uuid.NewString(),
 		Name: "test",
 	}
-	err := i.CreateShortcode(ctx, data)
+	err := i.CreateOffer(ctx, data)
 	require.NoError(t, err)
 
-	got, err := i.GetShortcode(ctx, &models.Shortcode{ID: data.ID})
+	got, err := i.GetOffer(ctx, &models.Offer{ID: data.ID})
 	require.NoError(t, err)
 	require.Equal(t, data.ID, got.ID)
 
-	got, err = i.GetShortcode(ctx, &models.Shortcode{ID: "not-found"})
+	got, err = i.GetOffer(ctx, &models.Offer{ID: "not-found"})
 	require.Error(t, err)
 	require.Nil(t, got)
 }
 
-func Test_impl_GetShortcodes(t *testing.T) {
+func Test_impl_GetOffers(t *testing.T) {
 	i := initDB(t)
 	ctx := context.Background()
 
-	existing, err := i.GetShortcodes(ctx, &models.Shortcode{})
+	existing, err := i.GetOffers(ctx, &models.Offer{})
 	require.NoError(t, err)
 
 	for _, e := range existing {
-		err = i.DeleteShortcode(ctx, e)
+		err = i.DeleteOffer(ctx, e)
 		require.NoError(t, err)
 	}
 
-	data := []*models.Shortcode{
+	data := []*models.Offer{
 		{
 			ID:   uuid.NewString(),
 			Name: "test",
@@ -220,11 +220,11 @@ func Test_impl_GetShortcodes(t *testing.T) {
 	}
 
 	for _, d := range data {
-		err = i.CreateShortcode(ctx, d)
+		err = i.CreateOffer(ctx, d)
 		require.NoError(t, err)
 	}
 
-	got, err := i.GetShortcodes(ctx, &models.Shortcode{})
+	got, err := i.GetOffers(ctx, &models.Offer{})
 	require.NoError(t, err)
 	require.Len(t, got, len(data))
 }

@@ -4,7 +4,7 @@ package models
 func AllModels() []interface{} {
 	return []interface{}{
 		&Organization{},
-		&Shortcode{},
+		&Offer{},
 		&User{},
 		&ContactGroup{},
 		&Contact{},
