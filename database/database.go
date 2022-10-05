@@ -36,6 +36,12 @@ type Repo interface {
 	GetOrganization(ctx context.Context, query *models.Organization) (*models.Organization, error)
 	GetOrganizations(ctx context.Context, query *models.Organization) ([]*models.Organization, error)
 
+	CreateOffer(ctx context.Context, data *models.Offer) error
+	UpdateOffer(ctx context.Context, data *models.Offer) error
+	DeleteOffer(ctx context.Context, query *models.Offer) error
+	GetOffer(ctx context.Context, query *models.Offer) (*models.Offer, error)
+	GetOffers(ctx context.Context, query *models.Offer) ([]*models.Offer, error)
+
 	CreateUser(ctx context.Context, data *models.User) error
 	UpdateUser(ctx context.Context, data *models.User) error
 	DeleteUser(ctx context.Context, query *models.User) error

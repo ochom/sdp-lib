@@ -63,6 +63,20 @@ func (mr *MockRepoMockRecorder) CreateContactGroup(ctx, data interface{}) *gomoc
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateContactGroup", reflect.TypeOf((*MockRepo)(nil).CreateContactGroup), ctx, data)
 }
 
+// CreateOffer mocks base method.
+func (m *MockRepo) CreateOffer(ctx context.Context, data *models.Offer) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "CreateOffer", ctx, data)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// CreateOffer indicates an expected call of CreateOffer.
+func (mr *MockRepoMockRecorder) CreateOffer(ctx, data interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "CreateOffer", reflect.TypeOf((*MockRepo)(nil).CreateOffer), ctx, data)
+}
+
 // CreateOrganization mocks base method.
 func (m *MockRepo) CreateOrganization(ctx context.Context, data *models.Organization) error {
 	m.ctrl.T.Helper()
@@ -131,6 +145,20 @@ func (m *MockRepo) DeleteContactGroup(ctx context.Context, query *models.Contact
 func (mr *MockRepoMockRecorder) DeleteContactGroup(ctx, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteContactGroup", reflect.TypeOf((*MockRepo)(nil).DeleteContactGroup), ctx, query)
+}
+
+// DeleteOffer mocks base method.
+func (m *MockRepo) DeleteOffer(ctx context.Context, query *models.Offer) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteOffer", ctx, query)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// DeleteOffer indicates an expected call of DeleteOffer.
+func (mr *MockRepoMockRecorder) DeleteOffer(ctx, query interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteOffer", reflect.TypeOf((*MockRepo)(nil).DeleteOffer), ctx, query)
 }
 
 // DeleteOrganization mocks base method.
@@ -233,6 +261,36 @@ func (m *MockRepo) GetContacts(ctx context.Context, query *models.Contact) ([]*m
 func (mr *MockRepoMockRecorder) GetContacts(ctx, query interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetContacts", reflect.TypeOf((*MockRepo)(nil).GetContacts), ctx, query)
+}
+
+// GetOffer mocks base method.
+func (m *MockRepo) GetOffer(ctx context.Context, query *models.Offer) (*models.Offer, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOffer", ctx, query)
+	ret0, _ := ret[0].(*models.Offer)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetOffer indicates an expected call of GetOffer.
+func (mr *MockRepoMockRecorder) GetOffer(ctx, query interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOffer", reflect.TypeOf((*MockRepo)(nil).GetOffer), ctx, query)
+}
+
+// GetOffers mocks base method.
+func (m *MockRepo) GetOffers(ctx context.Context, query *models.Offer) ([]*models.Offer, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetOffers", ctx, query)
+	ret0, _ := ret[0].([]*models.Offer)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetOffers indicates an expected call of GetOffers.
+func (mr *MockRepoMockRecorder) GetOffers(ctx, query interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetOffers", reflect.TypeOf((*MockRepo)(nil).GetOffers), ctx, query)
 }
 
 // GetOrganization mocks base method.
@@ -351,6 +409,20 @@ func (m *MockRepo) UpdateContactGroup(ctx context.Context, data *models.ContactG
 func (mr *MockRepoMockRecorder) UpdateContactGroup(ctx, data interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateContactGroup", reflect.TypeOf((*MockRepo)(nil).UpdateContactGroup), ctx, data)
+}
+
+// UpdateOffer mocks base method.
+func (m *MockRepo) UpdateOffer(ctx context.Context, data *models.Offer) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateOffer", ctx, data)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// UpdateOffer indicates an expected call of UpdateOffer.
+func (mr *MockRepoMockRecorder) UpdateOffer(ctx, data interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateOffer", reflect.TypeOf((*MockRepo)(nil).UpdateOffer), ctx, data)
 }
 
 // UpdateOrganization mocks base method.

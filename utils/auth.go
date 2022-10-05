@@ -35,15 +35,15 @@ type Token struct {
 func HashPassword(password string) (string, error) {
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
-		return "", err
+		return password, err
 	}
 
 	return string(hashedPassword), nil
 }
 
 // ComparePassword ...
-func ComparePassword(hashedPassword, password string) error {
-	return bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password))
+func ComparePassword(hashedPassword, password string) bool {
+	return bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(password)) == nil
 }
 
 //GenerateOTP generates a 6 figure OTP
@@ -73,6 +73,7 @@ func GenerateAuthToken(user *models.User) (*Token, error) {
 	}
 
 	refreshClaims := &signedDetails{
+		User: *user,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(time.Hour * 24).Unix(),
 		},
@@ -113,8 +114,8 @@ func ValidateToken(token string) (*models.User, error) {
 	return &claims.User, nil
 }
 
-// AuthenticatedUser gets user  from context returns nil if no user in context
-func AuthenticatedUser(ctx context.Context) *models.User {
+// GetAuthUser gets user  from context returns nil if no user in context
+func GetAuthUser(ctx context.Context) *models.User {
 	if ctx.Value(ctxUser) == nil {
 		return nil
 	}

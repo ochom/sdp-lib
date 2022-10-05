@@ -34,6 +34,7 @@ type User struct {
 	IsVerified     bool           `json:"isVerified"`
 	IsActive       bool           `json:"isActive"`
 	IsAdmin        bool           `json:"isAdmin"`
+	LastLogin      time.Time      `json:"lastLogin"`
 	CreatedAt      time.Time      `json:"createdAt"`
 	UpdatedAt      time.Time      `json:"updatedAt"`
 	DeletedAt      gorm.DeletedAt `json:"deletedAt"`
