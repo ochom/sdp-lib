@@ -6,6 +6,22 @@ import (
 	"gorm.io/gorm"
 )
 
+// Shortcode ...
+type Shortcode struct {
+	ID             string         `json:"id"`
+	OrganizationID string         `json:"organizationID"`
+	Name           string         `json:"name"`
+	Description    string         `json:"description"`
+	Shortcode      string         `json:"shortcode"`
+	OfferCode      string         `json:"offerCode"`
+	CpID           string         `json:"cpID"`
+	CpUsername     string         `json:"cpUsername"`
+	CpPassword     string         `json:"cpPassword"`
+	CreatedAt      time.Time      `json:"createdAt"`
+	UpdatedAt      time.Time      `json:"updatedAt"`
+	DeletedAt      gorm.DeletedAt `json:"deletedAt"`
+}
+
 // Inbox ...
 type Inbox struct {
 	ID          string         `json:"id"`

@@ -37,3 +37,35 @@ func (i *impl) GetOrganizations(ctx context.Context, query *models.Organization)
 	err := i.DB.Where(query).Find(&data).Error
 	return data, err
 }
+
+// CreateShortcode ...
+func (i *impl) CreateShortcode(ctx context.Context, data *models.Shortcode) error {
+	return i.DB.Create(data).Error
+}
+
+// UpdateShortcode ...
+func (i *impl) UpdateShortcode(ctx context.Context, data *models.Shortcode) error {
+	return i.DB.Save(data).Error
+}
+
+// DeleteShortcode ...
+func (i *impl) DeleteShortcode(ctx context.Context, query *models.Shortcode) error {
+	return i.DB.Where(query).Delete(&models.Shortcode{}).Error
+}
+
+// GetShortcode ...
+func (i *impl) GetShortcode(ctx context.Context, query *models.Shortcode) (*models.Shortcode, error) {
+	var data models.Shortcode
+	err := i.DB.Where(query).First(&data).Error
+	if err != nil {
+		return nil, err
+	}
+	return &data, nil
+}
+
+// GetShortcodes ...
+func (i *impl) GetShortcodes(ctx context.Context, query *models.Shortcode) ([]*models.Shortcode, error) {
+	var data []*models.Shortcode
+	err := i.DB.Where(query).Find(&data).Error
+	return data, err
+}
