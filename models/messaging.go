@@ -10,6 +10,7 @@ import (
 type Shortcode struct {
 	ID             string         `json:"id"`
 	OrganizationID string         `json:"organizationID"`
+	OrgName        string         `json:"orgName"`
 	Name           string         `json:"name"`
 	Description    string         `json:"description"`
 	Shortcode      string         `json:"shortcode"`
